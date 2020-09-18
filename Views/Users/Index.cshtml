@@ -1,0 +1,39 @@
+﻿@model List<CursoMVC.Models.TablesViewModels.UsersTableViewModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Usuarios</h2>
+<div class="row">
+    <div class="col-md-6">
+        <input type="button" class="btn btn-primary" onclick="document.location.href='@Url.Content("~/Users/Add")'" value="Nuevo Usuario"/>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12 p-2">
+        <table class="table table-bordered">
+            <thead class="warning">
+                <tr>
+                    <th>#</th>
+                    <th>Email</th>
+                    <th>Edad</th>
+                    <th></th>                    
+                </tr>
+            </thead>
+
+            @foreach(var oElement in Model)
+            {
+                <tr>
+                    <td>@oElement.Id</td>
+                    <td>@oElement.Email</td>
+                    <td>@oElement.Edad</td>
+                    <td>
+                        <input onclick="document.location.href='@Url.Content("~/Users/Edit")'" type="button" value="Editar" class="btn btn-default" />
+                        <input type="button" value="Eliminar" class="btn btn-danger" />
+                    </td>                    
+                </tr>
+            }
+        </table>
+    </div>
+</div>
