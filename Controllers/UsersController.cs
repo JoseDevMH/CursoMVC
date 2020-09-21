@@ -103,5 +103,22 @@ namespace CursoMVC.Controllers
         }
 
 
+        [HttpPost]
+        public ActionResult Delete(int Id)
+        {
+
+            using (var db = new cursoMvcEntities())
+            {
+                var oUser = db.user.Find(Id);
+                oUser.idState = 3; //Borrado logico, eliminaremos
+                
+
+                db.Entry(oUser).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Content("1");
+        }
+
     }
 }
