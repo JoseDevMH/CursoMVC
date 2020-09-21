@@ -11,6 +11,8 @@ namespace CursoMVC.Controllers
 {
     public class UsersController : Controller
     {
+        public object[] Id { get; private set; }
+
         // GET: Users
         public ActionResult Index()
         {
@@ -59,5 +61,47 @@ namespace CursoMVC.Controllers
 
             return Redirect(Url.Content("~/Users/"));
         }
+
+        public ActionResult Edit(int Id)
+        {
+            EditUserViewModels model = new EditUserViewModels();
+
+            using(var db = new cursoMvcEntities())
+            {
+                var oUser = db.user.Find(Id);
+                model.Id = oUser.id;
+                model.Email = oUser.email;
+                model.Edad = (int)oUser.edad;
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditUserViewModels model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            using (var db = new cursoMvcEntities())
+            {
+                var oUser = db.user.Find(model.Id);
+                oUser.email = model.Email;
+                oUser.edad = model.Edad;
+
+                if(model.Password != null && model.Password.Trim() != "")
+                {
+                    oUser.password = model.Password;
+                }
+
+                db.Entry(oUser).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return Redirect(Url.Content("~/Users/"));
+        }
+
+
     }
 }
