@@ -5,6 +5,14 @@
 
 <h2>@ViewBag.Title</h2>
 
+@if(ViewBag.Message != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.Message
+    </div>
+}
+
+
 @using (Html.BeginForm("Save","uploadFile", FormMethod.Post, new { enctype="multipart/form-data"}))
 {
     @Html.AntiForgeryToken(); //Seguridad para que el backend no acepte solicudes de fuera del sistema (otro)
