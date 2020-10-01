@@ -1,0 +1,32 @@
+﻿@model CursoMVC.Models.ViewModels.FileViewModel
+@{
+    ViewBag.Title = "Carga de Archivos";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Save","uploadFile", FormMethod.Post, new { enctype="multipar/form-data"}))
+{
+
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <div class="form-group">
+                @Html.LabelFor(d => d.File1)
+                @Html.TextBoxFor(d => d.File1, new { @class = "form-control" type = "file", accept = ".pdf" })
+                @Html.ValidationMessageFor(d => d.File1, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(d => d.File2)
+                @Html.TextBoxFor(d => d.File2, new { @class = "form-control" type = "file", accept = ".pdf" })
+                @Html.ValidationMessageFor(d => d.File2, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(d => d.cadena)
+                @Html.TextBoxFor(d => d.cadena, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.cadena, "", new { @class = "text-danger" })                
+            </div>
+    </div>
+}
+

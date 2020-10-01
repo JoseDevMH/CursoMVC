@@ -131,6 +131,7 @@
     <Compile Include="Controllers\AccessController.cs" />
     <Compile Include="Controllers\CloseSessionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\uploadFileController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\VerifySession.cs" />
     <Compile Include="Global.asax.cs">
@@ -219,9 +220,11 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Add.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\uploadFile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
     <Folder Include="Views\CloseSession\" />
   </ItemGroup>
   <ItemGroup>
