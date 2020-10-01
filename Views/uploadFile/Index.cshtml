@@ -5,11 +5,11 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Save","uploadFile", FormMethod.Post, new { enctype="multipar/form-data"}))
+@using (Html.BeginForm("Save","uploadFile", FormMethod.Post, new { enctype="multipart/form-data"}))
 {
     @Html.AntiForgeryToken(); //Seguridad para que el backend no acepte solicudes de fuera del sistema (otro)
     <div class="row">
-        <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-10 col-lg-offset-1">
             <div class="form-group">
                 @Html.LabelFor(d => d.File1)
                 @Html.TextBoxFor(d => d.File1, new { @class = "form-control", type = "file", accept = ".pdf" })
@@ -23,13 +23,13 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(d => d.cadena)
-                @Html.TextBoxFor(d => d.cadena, new { @class = "form-control" })
-                @Html.ValidationMessageFor(d => d.cadena, "", new { @class = "text-danger" })                
+                @Html.LabelFor(d => d.Cadena)
+                @Html.TextBoxFor(d => d.Cadena, new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Cadena, "", new { @class = "text-danger" })                
             </div>
 
             <div class="form-group">
-                <input type="submit" class="btn btn-success" value="Guardar" />
+                <input type="submit" class="form-control btn btn-success" value="Guardar"/>
             </div>
         </div>
     </div>

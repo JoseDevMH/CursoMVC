@@ -19,6 +19,6 @@ namespace CursoMVC.Models.ViewModels
 
         [Required]
         [DisplayName("Titulo")]
-        public string cadena { get; set; }
+        public string Cadena { get; set; }
     } 
 }
