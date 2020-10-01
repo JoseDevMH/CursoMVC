@@ -32,7 +32,7 @@ namespace CursoMVC.Controllers
                     }
                     else
                     {
-                        return Content("USuario invalido :(");
+                        return Content("Usuario invalido :(");
                     }
                 }
                 
