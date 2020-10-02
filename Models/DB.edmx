@@ -5,6 +5,21 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="cursoMvcModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="animal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="idAnimalClass" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="animalClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="cstate">
           <Key>
             <PropertyRef Name="id" />
@@ -22,6 +37,18 @@
           <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="idState" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_animal_animalClass">
+          <End Role="animalClass" Type="Self.animalClass" Multiplicity="1" />
+          <End Role="animal" Type="Self.animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalClass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal">
+              <PropertyRef Name="idAnimalClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_user_cstate">
           <End Role="cstate" Type="Self.cstate" Multiplicity="1" />
           <End Role="user" Type="Self.user" Multiplicity="*" />
@@ -35,8 +62,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="cursoMvcModelStoreContainer">
+          <EntitySet Name="animal" EntityType="Self.animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="animalClass" EntityType="Self.animalClass" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="cstate" EntityType="Self.cstate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="user" EntityType="Self.user" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_animal_animalClass" Association="Self.FK_animal_animalClass">
+            <End Role="animalClass" EntitySet="animalClass" />
+            <End Role="animal" EntitySet="animal" />
+          </AssociationSet>
           <AssociationSet Name="FK_user_cstate" Association="Self.FK_user_cstate">
             <End Role="cstate" EntitySet="cstate" />
             <End Role="user" EntitySet="user" />
@@ -52,6 +85,12 @@
           <AssociationSet Name="FK_user_cstate" Association="cursoMvcModel.FK_user_cstate">
             <End Role="cstate" EntitySet="cstate" />
             <End Role="user" EntitySet="user" />
+          </AssociationSet>
+          <EntitySet Name="animal" EntityType="cursoMvcModel.animal" />
+          <EntitySet Name="animalClass" EntityType="cursoMvcModel.animalClass" />
+          <AssociationSet Name="FK_animal_animalClass" Association="cursoMvcModel.FK_animal_animalClass">
+            <End Role="animalClass" EntitySet="animalClass" />
+            <End Role="animal" EntitySet="animal" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="cstate">
@@ -85,6 +124,35 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="animal">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="idAnimalClass" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="animalClass" Relationship="cursoMvcModel.FK_animal_animalClass" FromRole="animal" ToRole="animalClass" />
+        </EntityType>
+        <EntityType Name="animalClass">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="animal" Relationship="cursoMvcModel.FK_animal_animalClass" FromRole="animalClass" ToRole="animal" />
+        </EntityType>
+        <Association Name="FK_animal_animalClass">
+          <End Type="cursoMvcModel.animalClass" Role="animalClass" Multiplicity="1" />
+          <End Type="cursoMvcModel.animal" Role="animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="animalClass">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="animal">
+              <PropertyRef Name="idAnimalClass" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -106,6 +174,23 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="edad" ColumnName="edad" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="animal">
+            <EntityTypeMapping TypeName="cursoMvcModel.animal">
+              <MappingFragment StoreEntitySet="animal">
+                <ScalarProperty Name="idAnimalClass" ColumnName="idAnimalClass" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="animalClass">
+            <EntityTypeMapping TypeName="cursoMvcModel.animalClass">
+              <MappingFragment StoreEntitySet="animalClass">
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

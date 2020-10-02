@@ -8,6 +8,9 @@
         <EntityTypeShape EntityType="cursoMvcModel.cstate" Width="1.5" PointX="0.75" PointY="1.125" />
         <EntityTypeShape EntityType="cursoMvcModel.user" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="cursoMvcModel.FK_user_cstate" />
+        <EntityTypeShape EntityType="cursoMvcModel.animal" Width="1.5" PointX="2.875" PointY="3.5" />
+        <EntityTypeShape EntityType="cursoMvcModel.animalClass" Width="1.5" PointX="0.625" PointY="3.625" />
+        <AssociationConnector Association="cursoMvcModel.FK_animal_animalClass" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
